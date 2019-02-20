@@ -1,5 +1,8 @@
 #include <WINSOCK2.H>   
-#include <stdio.h>     
+#include <stdio.h>  
+#include <iostream>
+#include<windows.h>
+using namespace std;   
                     
 //定义程序中使用的常量      
 #define SERVER_ADDRESS "127.0.0.1" //服务器端IP地址      
@@ -34,13 +37,25 @@ int main()
                                                         //inet_addr()用于将 形如的"127.0.0.1"字符串转换为IP地址格式      
     //连到刚才指明的服务器上      
     connect(sClient, (struct sockaddr *) &server, sizeof(SOCKADDR_IN)); //连接后可以用sClient来使用这个连接      
-                                                                        //server保存了远程服务器的地址信息      
+    printf("Redis by ShimmerPig start-up...\n");                                                            //server保存了远程服务器的地址信息      
     while (TRUE) {      
+		
         printf("PigPig_Redis>");      
         //从键盘输入      
         gets(szMessage); //The gets() functionreads characters from stdin and loads them into szMessage      
         // 发送数据      
         send(sClient, szMessage, strlen(szMessage), 0); //sClient指明用哪个连接发送； szMessage指明待发送数据的保存地址 ；strlen(szMessage)指明数据长度      
+	
+		//system("pause");
+
+		Sleep(1000);
+
+		//接收服务端传回的数据
+		char szBuffer[MAXBYTE] = {0};  
+		recv(sClient, szBuffer, MAXBYTE, NULL); 
+		//输出收到的数据
+		cout <<"服务器回复: "<< szBuffer << endl;
+
 	}      
                    
     // 释放连接和进行结束工作      
