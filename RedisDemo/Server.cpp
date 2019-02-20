@@ -1,5 +1,5 @@
 #pragma warning(disable: 4786)
-//服务端 
+//服务端
 #include <WINSOCK2.H>   
 #include <stdio.h>     
 #include <string>
@@ -12,7 +12,7 @@
 #include "myRedis.h"
 using namespace std;
 
-//数据库数组的个数
+//服务端数据库数组的个数
 #define dbNum 15
 //端口号                    
 #define PORT           5150    
@@ -24,11 +24,11 @@ using namespace std;
 #define MAXCLIENTNUM 15
         
 //服务器需要一个存放资源的db数组，每个客户端一连接，
-//就创建一个Client，并且让它与对应的资源db[i]绑定
+//就创建一个Client，并且让它与对应的数据库db[i]绑定
 //db中是一个字典构成的数组，让对应的Client存放key-value
-//客户端输入命令，服务器对命令进行拆分，然后在命令
-//表中查询命令是否合法后，执行set命令，将key-value
-//存储在db的字典数组中，最后返回响应给客户端。
+//客户端输入命令，服务器对命令进行拆分，在自己的命令
+//集合中查询命令是否合法后，相应的命令。
+//客户端若执行set命令，则将key-value存储在db的字典数组中，最后返回响应给客户端。
 typedef void (*CommandFun) (Server*,Client*,string,string&);
 typedef map<string,CommandFun> mymap;
 typedef map<string,string> myDB;
@@ -238,8 +238,7 @@ int main()
 {
 	WSADATA wsaData;  
 	int iaddrSize = sizeof(SOCKADDR_IN); 
-	//创建客户端
-	Client* client;
+	//Client* client;
  
 	DWORD dwThreadId;
       
