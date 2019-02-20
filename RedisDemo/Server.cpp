@@ -1,5 +1,5 @@
 #pragma warning(disable: 4786)
-//服务端 https://www.cnblogs.com/maowang1991/p/3567788.html
+//服务端 
 #include <WINSOCK2.H>   
 #include <stdio.h>     
 #include <string>
